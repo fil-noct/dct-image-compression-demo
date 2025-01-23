@@ -1,2 +1,2 @@
 # dct-image-compression-demo
-A web-based visual demonstration of JPEG-like image compression using Discrete Cosine Transform (DCT) and thresholding
+A web-based visual demonstration of JPEG-like image compression using Discrete Cosine Transform (DCT) and thresholding. Built with a Vanilla JavaScript frontend for interactive visualization and a high-performance Rust/WASM backend for efficient computation. This project explores the fundamentals of lossy image compression and serves as an educational tool for understanding JPEG compression techniques.
