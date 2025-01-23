@@ -1,0 +1,18 @@
+{
+  "name": "rust-dct",
+  "type": "module",
+  "collaborators": [
+    "Filippo Colpani <filippocolpani@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "rust_dct_bg.wasm",
+    "rust_dct.js",
+    "rust_dct.d.ts"
+  ],
+  "main": "rust_dct.js",
+  "types": "rust_dct.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
