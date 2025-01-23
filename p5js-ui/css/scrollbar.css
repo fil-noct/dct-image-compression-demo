@@ -1,0 +1,27 @@
+::-webkit-scrollbar {
+    width: 8px;
+    /* Larghezza della scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #c1c1c130;
+    /* Colore di sfondo della traccia della scrollbar */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00000046;
+    /* Colore del "thumb" della scrollbar */
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00000084;
+    /* Colore del "thumb" quando hover */
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+    /* Nasconde i pulsanti della scrollbar (se presenti) */
+}

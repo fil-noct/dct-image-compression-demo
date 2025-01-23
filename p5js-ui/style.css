@@ -1,0 +1,12 @@
+@import "css/font.css";
+@import "css/scrollbar.css";
+@import "css/controls.css";
+@import "css/canvas.css";
+@import "css/paper-dialog.css";
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', serif;
+}

@@ -1,0 +1,61 @@
+input[type=button]{
+    background-color: #0b583cd1;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+}
+
+input[type=button]:disabled{
+    background-color: grey;
+    cursor: default;
+}
+
+.state_controller{
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+#state_title{
+    text-align: center;
+    max-width: 400px;
+}
+
+#process_controller{
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: auto;
+}
+
+#upload_controller{
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: auto;
+}
+
+
+.controller{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100px;
+}
+
+#speed{
+    width: 50px;
+    text-align: center;
+}
