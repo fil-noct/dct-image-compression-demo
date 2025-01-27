@@ -1,17 +1,32 @@
 /* tslint:disable */
 /* eslint-disable */
-export function dct_js(image: any, width: number, height: number): any;
+export function initialize(): void;
+export class CompressionOptions {
+  free(): void;
+  constructor(width: number, height: number);
+}
+export class ImageProcessor {
+  free(): void;
+  constructor(options: CompressionOptions);
+  compress_image(image_data: any): any;
+}
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly dct_js: (a: any, b: number, c: number) => [number, number, number];
-  readonly __wbindgen_exn_store: (a: number) => void;
-  readonly __externref_table_alloc: () => number;
-  readonly __wbindgen_export_2: WebAssembly.Table;
+  readonly initialize: () => void;
+  readonly __wbg_compressionoptions_free: (a: number, b: number) => void;
+  readonly compressionoptions_new: (a: number, b: number) => number;
+  readonly __wbg_imageprocessor_free: (a: number, b: number) => void;
+  readonly imageprocessor_new: (a: number) => number;
+  readonly imageprocessor_compress_image: (a: number, b: any) => [number, number, number];
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+  readonly __wbindgen_exn_store: (a: number) => void;
+  readonly __externref_table_alloc: () => number;
+  readonly __wbindgen_export_4: WebAssembly.Table;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __externref_table_dealloc: (a: number) => void;
   readonly __wbindgen_start: () => void;
 }

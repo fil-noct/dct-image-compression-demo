@@ -9,7 +9,7 @@ export default class ResultState extends State {
 
     init(data) {
         super.init(data);
-        this.rate = (320*320-this.data.compression_result.dct_zeros) /( 320*320-this.data.compression_result.compressed_dct_zeros) ;
+        this.rate = (320*320-this.data.compression_result.dct_zero_count) /( 320*320-this.data.compression_result.compressed_dct_zero_count) ;
 
         this.refreshSize();
         Controller.hideControllers()

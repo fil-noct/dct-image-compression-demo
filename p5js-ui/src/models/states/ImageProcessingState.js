@@ -1,7 +1,7 @@
 import ImageProcessingController from "../../controllers/ImageProcessingController.js";
 
 import State from "./State.js";
-import ImagePrcessor from "../ImageProcessor.js";
+import ImageProcessor from "../ImageProcessor.js";
 
 export default class ImageProcessingState extends State {
     constructor(title) {
@@ -31,12 +31,12 @@ export default class ImageProcessingState extends State {
         }
         this.data.compression_result = null;
 
-        ImagePrcessor.compress(pixelArray, this.imageSize.x, this.imageSize.y).then(v => this.data.compression_result = v);
+        ImageProcessor.compressImage(pixelArray, this.imageSize.x, this.imageSize.y).then(v => this.data.compression_result = v);
     }
 
     showCalcs(){
         if (this.data.compression_result != null && this.index!=null) {
-            document.getElementById("paper_dialog_body").innerHTML=this.data.compression_result.latex_calc_steps[this.index];
+            document.getElementById("paper_dialog_body").innerHTML=this.data.compression_result.latex_calculations[this.index];
             MathJax.typeset();
             document.getElementById("paper_dialog").showModal();
         }
@@ -140,7 +140,7 @@ export default class ImageProcessingState extends State {
                 square(this.matrixZoom.x + i * this.matrixScale, this.matrixZoom.y + j * this.matrixScale, this.matrixScale)
             }
         }
-        let compressed_matrix = this.data.compression_result.compressed_image_matrices[this.index];
+        let compressed_matrix = this.data.compression_result.compressed_image_submatrices[this.index];
         textAlign(LEFT);
         fill(0);
         stroke(0);
