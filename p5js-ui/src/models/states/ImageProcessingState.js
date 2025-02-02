@@ -122,7 +122,7 @@ export default class ImageProcessingState extends State {
     renderMatrix() {
         noFill();
         strokeWeight(1);
-        stroke('rgba(100%, 0%, 0%, 0.5)');
+        stroke('rgb(198, 69, 76)');
 
         line(this.x + this.imageOffset.x, this.y + this.imageOffset.y, this.matrixZoom.x, this.matrixZoom.y);
         line(this.x + this.imageOffset.x + this.matrixSize, this.y + this.imageOffset.y, this.matrixZoom.x + this.matrixSize * this.matrixScale, this.matrixZoom.y);
@@ -130,7 +130,7 @@ export default class ImageProcessingState extends State {
         line(this.x + this.imageOffset.x + this.matrixSize, this.y + this.imageOffset.y + this.matrixSize, this.matrixZoom.x + this.matrixSize * this.matrixScale, this.matrixZoom.y + this.matrixSize * this.matrixScale);
 
         strokeWeight(2);
-        stroke(255, 0, 0);
+        stroke('rgb(198, 69, 76)');
         square(this.imageOffset.x + this.x, this.imageOffset.y + this.y, this.matrixSize);
         for (let i = 0; i < this.matrixSize; i++) {
             for (let j = 0; j < this.matrixSize; j++) {
@@ -151,7 +151,7 @@ export default class ImageProcessingState extends State {
             for (let j = 0; j < this.matrixSize; j++) {
                 let px = this.data.img.get(this.x + i, this.y + j);
 
-                stroke(255, 0, 0);
+                stroke('rgb(198, 69, 76)');
                 strokeWeight(1);
                 fill(px);
                 square(this.matrixZoom.x + i * this.matrixScale, this.matrixZoom.y + j * this.matrixScale, this.matrixScale);

@@ -22,7 +22,7 @@ let data = {
 
 export function preload() {
   //img = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Pictograms_on_Sony_Betamax_Portable.jpg/220px-Pictograms_on_Sony_Betamax_Portable.jpg");
-  montserratFont = loadFont("assets/Montserrat-Regular.ttf");
+  montserratFont = loadFont("/p5js-ui/assets/Montserrat-Regular.ttf");
 }
 
 export function setup() {
@@ -56,7 +56,7 @@ export function setup() {
 }
 
 export function draw() {
-  background(255);
+  background(243, 237, 218);
   
   currentState.render();
   // if (currentState.isEnded()) {

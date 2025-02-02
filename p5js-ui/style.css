@@ -3,10 +3,19 @@
 @import "css/controls.css";
 @import "css/canvas.css";
 @import "css/paper-dialog.css";
-
+@import "css/container.css";
 
 html, body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', serif;
+  background: #1a1a1a;
+  color: white;
+}
+
+main{
+  
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
 }

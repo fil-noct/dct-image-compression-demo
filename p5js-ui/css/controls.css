@@ -1,5 +1,38 @@
+input[type=button] {
+    border-radius: 18px;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+    font-size: 18px;
+    background-color: #e9e9ef;
+    margin: auto;
+    transition: 100ms ease-out;
+    cursor: pointer;
+    padding: 16px;
+    border: 0;
+
+    &:hover {
+        box-shadow:
+            4px 4px 6px rgba(0, 0, 0, .2),
+            5px 10px 35px rgba(0, 0, 0, .1),
+            8px 10px 25px rgba(0, 0, 0, .1);
+        transform: scale(.98);
+
+
+    }
+
+    &:active {
+        box-shadow: inset 2px 2px 16px rgba(255, 255, 255, .9), inset 8px 8px 9px rgba(0, 0, 0, .2), 5px 10px 5px rgba(0, 0, 0, .03), -5px -5px 25px rgba(255, 255, 255, .1), -2px -2px 9px rgba(100, 100, 100, .1), inset -2px -2px 9px rgba(255, 255, 255, 1);
+        outline: none;
+        background-color: #e5e5ef;
+        text-shadow: -2px -2px 3px rgba(0, 0, 0, .2), 2px 2px 3px rgba(255, 255, 255, 1);
+        transform: translateY(3px);
+    }
+}
+
+
+
+/* 
 input[type=button]{
-    background-color: #0b583cd1;
+    background-color: #000000;
     border: none;
     color: white;
     padding: 8px 16px;
@@ -7,29 +40,17 @@ input[type=button]{
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
+} */
+
+input[type=button]:disabled {
+    box-shadow: inset 2px 2px 16px rgba(255, 255, 255, .9), inset 8px 8px 9px rgba(0, 0, 0, .2), 5px 10px 5px rgba(0, 0, 0, .03), -5px -5px 25px rgba(255, 255, 255, .1), -2px -2px 9px rgba(100, 100, 100, .1), inset -2px -2px 9px rgba(255, 255, 255, 1);
+    outline: none;
+    background-color: #e5e5ef;
+    text-shadow: -2px -2px 3px rgba(0, 0, 0, .2), 2px 2px 3px rgba(255, 255, 255, 1);
+    transform: translateY(3px);
 }
 
-input[type=button]:disabled{
-    background-color: grey;
-    cursor: default;
-}
-
-.state_controller{
-    display: flex;
-    flex-direction: row;
-    padding: 16px;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 800px;
-    margin: auto;
-}
-
-#state_title{
-    text-align: center;
-    max-width: 400px;
-}
-
-#process_controller{
+#process_controller {
     padding: 16px;
     display: flex;
     flex-direction: row;
@@ -38,7 +59,7 @@ input[type=button]:disabled{
     margin: auto;
 }
 
-#upload_controller{
+#upload_controller {
     padding: 16px;
     display: flex;
     flex-direction: row;
@@ -47,15 +68,14 @@ input[type=button]:disabled{
     margin: auto;
 }
 
-
-.controller{
+.controller {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100px;
 }
 
-#speed{
+#speed {
     width: 50px;
     text-align: center;
 }

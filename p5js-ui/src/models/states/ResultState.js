@@ -41,7 +41,7 @@ export default class ResultState extends State {
 
             text("Dimension rate: "+this.rate.toFixed(2).toString()+" : 1", width/2, 400+this.offset.y)
             
-            text("Reducition: "+ ((1-1/this.rate)*100).toFixed(2).toString()+" %", width/2, 450+this.offset.y)
+            text("Reduction: "+ ((1-1/this.rate)*100).toFixed(2).toString()+" %", width/2, 450+this.offset.y)
         }
     };
 

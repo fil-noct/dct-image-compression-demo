@@ -9,7 +9,6 @@ export default class State{
 
     init(data){
         Controller.hideControllers();
-        DOMUtils.setInnerHTML("controls", "");
         DOMUtils.setInnerHTML("state_title", this.title);
         this.ended=false;
         this.data=data;
