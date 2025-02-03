@@ -9,7 +9,7 @@ let states = [];
 let currentState;
 let currentStateIndex = 0;
 
-let speed = 30;
+let speed = 5;
 let play = false;
 
 let montserratFont;
@@ -22,7 +22,7 @@ let data = {
 
 export function preload() {
   //img = loadImage("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Pictograms_on_Sony_Betamax_Portable.jpg/220px-Pictograms_on_Sony_Betamax_Portable.jpg");
-  montserratFont = loadFont("/p5js-ui/assets/Montserrat-Regular.ttf");
+  montserratFont = loadFont("assets/Montserrat-Regular.ttf");
 }
 
 export function setup() {
@@ -56,7 +56,7 @@ export function setup() {
 }
 
 export function draw() {
-  background(243, 237, 218);
+  background(240, 240, 240);
   
   currentState.render();
   // if (currentState.isEnded()) {
@@ -76,12 +76,13 @@ export function windowResized() {
 }
 
 function adaptiveResizeCanvas() {
-  let newWidth = windowWidth - 200;
-  let newHeight = windowHeight - 200;
+  let offset =200
+  let newWidth = windowWidth - offset;
+  let newHeight = windowHeight - offset -100;
   if (newWidth < 600 || newHeight < 400) {
     resizeCanvas(600, 400);
   } else {
-    if (newWidth / ratio <= windowHeight - 200) {
+    if (newWidth / ratio <= windowHeight - offset) {
       resizeCanvas(newWidth, newWidth / ratio);
     } else {
       resizeCanvas(newHeight * ratio, newHeight);
@@ -120,7 +121,7 @@ function togglePlay(state) {
   if (play) {
     frameRate(1 * speed);
   } else {
-    frameRate(30);
+    frameRate(10);
   }
   updateControls();
 }
@@ -146,15 +147,15 @@ function updateControls() {
 function changeSpeed(sign) {
   let delta = 0;
   if (sign > 0) {
-    delta = 0.25;
-    if (speed >= 2) delta = 0.5
+    delta = 0.5;
+    // if (speed >= 2) delta = 0.5
     if (speed >= 5) delta = 1;
     if (speed >= 10) delta = 10;
   } else {
     delta = 10;
     if (speed <= 10) delta = 1;
     if (speed <= 5) delta = 0.5;
-    if (speed <= 2) delta = 0.25;
+    // if (speed <= 2) delta = 0.25;
   }
 
   speed += delta * sign;

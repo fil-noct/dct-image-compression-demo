@@ -9,13 +9,12 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', serif;
-  background: #1a1a1a;
-  color: white;
+  background: #e0e0e0;
 }
 
 main{
-  
-  min-height: 100vh;
+  margin-top: auto;
+  margin-bottom: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }

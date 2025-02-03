@@ -1,62 +1,95 @@
-input[type=button] {
-    border-radius: 18px;
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
-    font-size: 18px;
-    background-color: #e9e9ef;
-    margin: auto;
-    transition: 100ms ease-out;
-    cursor: pointer;
-    padding: 16px;
-    border: 0;
+input {
+    margin: 8px;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+    border-radius: 5px;
+    background: #e0e0e0;
+    box-shadow: 5px 5px 10px #bebebe,
+        -5px -5px 10px #f8f8f8;
 
-    &:hover {
-        box-shadow:
-            4px 4px 6px rgba(0, 0, 0, .2),
-            5px 10px 35px rgba(0, 0, 0, .1),
-            8px 10px 25px rgba(0, 0, 0, .1);
-        transform: scale(.98);
-
-
-    }
-
+    &:disabled,
     &:active {
-        box-shadow: inset 2px 2px 16px rgba(255, 255, 255, .9), inset 8px 8px 9px rgba(0, 0, 0, .2), 5px 10px 5px rgba(0, 0, 0, .03), -5px -5px 25px rgba(255, 255, 255, .1), -2px -2px 9px rgba(100, 100, 100, .1), inset -2px -2px 9px rgba(255, 255, 255, 1);
         outline: none;
-        background-color: #e5e5ef;
-        text-shadow: -2px -2px 3px rgba(0, 0, 0, .2), 2px 2px 3px rgba(255, 255, 255, 1);
-        transform: translateY(3px);
+        background: #e0e0e0;
+        box-shadow: inset 5px 5px 10px #bebebe,
+            inset -5px -5px 10px #f8f8f8;
     }
 }
 
 
+input[type=button] {
+    font-weight: bold;
 
-/* 
-input[type=button]{
-    background-color: #000000;
     border: none;
-    color: white;
+    color: black;
     padding: 8px 16px;
     text-decoration: none;
-    margin: 4px 2px;
     cursor: pointer;
-    border-radius: 16px;
-} */
+    transition: 300ms ease-in-out;
+}
 
 input[type=button]:disabled {
-    box-shadow: inset 2px 2px 16px rgba(255, 255, 255, .9), inset 8px 8px 9px rgba(0, 0, 0, .2), 5px 10px 5px rgba(0, 0, 0, .03), -5px -5px 25px rgba(255, 255, 255, .1), -2px -2px 9px rgba(100, 100, 100, .1), inset -2px -2px 9px rgba(255, 255, 255, 1);
+    cursor: default;
+}
+
+
+
+input[type="file"] {
+    appearance: none;
+}
+
+.custom-file-picker {
+    font-weight: bold;
+    margin: auto;
+    border-radius: 5px;
+    padding: 16px;
+    background: #e0e0e0;
+    box-shadow: 5px 5px 10px #bebebe,
+        -5px -5px 10px #f8f8f8;
+    cursor: pointer;
+
+    &:active {
+        outline: none;
+        background: #e0e0e0;
+        box-shadow: inset 5px 5px 10px #bebebe,
+            inset -5px -5px 10px #f8f8f8;
+    }
+}
+
+
+input[type="range"] {
+    appearance: none;
+    width: 150px;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    box-shadow: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff;
     outline: none;
-    background-color: #e5e5ef;
-    text-shadow: -2px -2px 3px rgba(0, 0, 0, .2), 2px 2px 3px rgba(255, 255, 255, 1);
-    transform: translateY(3px);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
+    cursor: pointer;
+}
+
+
+#state_title {
+    text-align: center;
+    max-width: 400px;
+    color: #666;
 }
 
 #process_controller {
-    padding: 16px;
+    padding: 0px 20px;
+    margin: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    max-width: 600px;
-    margin: auto;
 }
 
 #upload_controller {
@@ -68,14 +101,55 @@ input[type=button]:disabled {
     margin: auto;
 }
 
+
 .controller {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100px;
+
+}
+
+
+#speed {
+    width: 50px;
+    text-align: center;
+}
+
+
+#upload_controller {
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: auto;
 }
 
 #speed {
     width: 50px;
     text-align: center;
+}
+
+
+#next_state,
+#prev_state {
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 0;
+    box-shadow: none;
+    border-radius: 40px;
+    background: #e0e0e0;
+    box-shadow: 6px 6px 12px #bebebe,
+        -6px -6px 12px #ffffff;
+    height: 40px;
+    width: 40px;
+
+    &:active,
+    &:disabled {
+        border-radius: 40px;
+        background: #e0e0e0;
+        box-shadow: inset 6px 6px 12px #bebebe,
+            inset -6px -6px 12px #ffffff;
+    }
+
 }

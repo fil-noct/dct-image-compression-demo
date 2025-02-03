@@ -89,55 +89,44 @@
 
     <div class="display" id="p5_canvas"></div>
 
-    <div class="controls">
-
       <div id="controllers">
         <div id="upload_controller" class="controller">
-          <input type="file" value="Upload Image" id="img_upload" accept=".png,.jpg">
+          <input type="file" id="img_upload" accept=".png,.jpg" hidden>
+          <label for="img_upload" class="custom-file-picker">Upload image</label>
         </div>
 
         <div id="process_controller">
           <div class="controller">
+            <input type="range">
+            <!-- <div class="knob-container">
+              <div class="knob"></div>
+              <p class="label">Speed</p>
+            </div> -->
             <input type="button" value="-" id="slow_down">
             <div id="speed">&nbsp;</div>
             <input type="button" value="+" id="speed_up">
           </div>
 
           <div class="controller">
-            <input type="button" value="⏹" id="stop">
-            <input type="button" value="⏵" id="play">
+            <input type="button" value="◼" id="stop">
+            <input type="button" value="▶" id="play">
+            
+            <p class="label">Stop/Play</p>
           </div>
 
           <div class="controller">
-            <input type="button" value="<" id="prev_step">
-            <input type="button" value=">" id="next_step">
+            <input type="button" value="←" id="prev_step">
+            <input type="button" value="→" id="next_step">
+            
+            <p class="label">Steps</p>
           </div>
 
           <div class="controller">
             <input type="button" value="Show Steps" id="show_calcs">
           </div>
         </div>
-      </div>
-      <!-- <div class="knob-container">
-          <div class="knob"></div>
-          <div class="label">Sustain</div>
-        </div>
-        <div class="knob-container">
-          <div class="knob"></div>
-          <div class="label">Attack</div>
-        </div>
-        <div class="knob-container">
-          <div class="knob"></div>
-          <div class="label">Release</div>
-        </div>
-        <div class="knob-container">
-          <div class="knob"></div>
-          <div class="label">Ratio</div>
-        </div>
-        <div class="knob-container">
-          <div class="knob"></div>
-          <div class="label">Match</div>
-        </div> -->
+      
+      
     </div>
   </div>
 

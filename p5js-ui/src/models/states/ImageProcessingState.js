@@ -56,7 +56,7 @@ export default class ImageProcessingState extends State {
             }
             this.renderImage();
             this.renderMatrix();
-            if (width > 900) {
+            if (width > 800) {
                 this.renderMatrixText();
             }
         }
