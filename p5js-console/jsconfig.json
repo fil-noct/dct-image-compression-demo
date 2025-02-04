@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6"
+  },
+  "include": [
+    "*.js",
+    "src/**/*.js",
+    "lib/p5types/global.d.ts"
+  ]
+}

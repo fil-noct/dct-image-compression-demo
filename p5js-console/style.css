@@ -1,0 +1,27 @@
+@import "css/font.css";
+@import "css/scrollbar.css";
+@import "css/controls.css";
+@import "css/canvas.css";
+@import "css/paper-dialog.css";
+@import "css/console.css";
+@import "css/neumorphic.css";
+
+:root{
+  --bg: #555f66;
+  --color: #dfdedd;
+  --console: #cdcbc8;
+  --shadow: 9px 9px 18px #bdbab8, -9px -9px 18px #fffcf8;
+  --rev-shadow: inset 9px 9px 18px #bdbab8, inset -9px -9px 18px #fffcf8;
+  --hover-color: #e5e2de;
+  --gradient: linear-gradient( -90deg, #e0dfde, #dbd7d5);
+} 
+
+html, body {
+  font-family: 'Montserrat', serif;
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}

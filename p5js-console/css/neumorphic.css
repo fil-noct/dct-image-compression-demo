@@ -1,0 +1,12 @@
+.neumorph {
+    border-radius: 10px;
+    background: var(--color);
+    box-shadow: var(--shadow);
+
+    &:active,
+    &:focus {
+        border-radius: 10px;
+        background: var(--color);
+        box-shadow: var(--rev-shadow)
+    }
+}
