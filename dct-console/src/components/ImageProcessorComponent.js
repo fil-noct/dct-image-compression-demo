@@ -1,42 +1,116 @@
-import ImageProcessingController from "../../controllers/ImageProcessingController.js";
+import DOMUtils from "../utils/DOMUtils.js";
+import ImageProcessor from "../utils/ImageProcessor.js";
 
-import State from "./State.js";
-import ImageProcessor from "../ImageProcessor.js";
 
-export default class ImageProcessingState extends State {
-    constructor(title) {
-        super(title);
-        this.imageSize = createVector(320, 320);
+export default class ImageProcessorComponent {
+
+    static disableControllers() {
+        DOMUtils.disableInput("prev_step");
+        DOMUtils.disableInput("next_step");
+        DOMUtils.disableInput("play");
+        DOMUtils.disableInput("stop");
+        DOMUtils.disableInput("speed_up");
+        DOMUtils.disableInput("slow_down");
     }
 
-    init(data) {
-        super.init(data);
-        this.refreshSize();
+    static enableControllers() {
+        DOMUtils.enableInput("prev_step");
+        DOMUtils.enableInput("next_step");
+        DOMUtils.enableInput("play");
+        DOMUtils.enableInput("stop");
+        DOMUtils.enableInput("speed_up");
+        DOMUtils.enableInput("slow_down");
+    }
+
+    constructor() {
+        this.speed = 5;
+        this.play = false;
+
+        DOMUtils.setClickEvent("prev_step", this.prevStep);
+        DOMUtils.setClickEvent("next_step", this.nextStep);
+
+        DOMUtils.setClickEvent("play", () => this.togglePlay(true));
+        DOMUtils.setClickEvent("stop", () => this.togglePlay(false));
+
+        DOMUtils.setClickEvent("speed_up", () => this.changeSpeed(1));
+        DOMUtils.setClickEvent("slow_down", () => this.changeSpeed(-1));
+        DOMUtils.setInnerHTML("speed", this.speed);
+
+    }
+
+    async init(rawImage){
+        this.imageSize = { x: 320, y: 320 };
+        this.img = await ImageProcessorComponent.preProcessImage(rawImage, this.imageSize.x, this.imageSize.y);
+        this.imageData=ImageProcessorComponent.getImageData(this.img);
+        this.canvas=document.getElementById("img_canvas");
+        this.ctx = this.canvas.getContext("2d");
         this.x = 0;
         this.y = 0;
 
-        ImageProcessingController.init(()=>this.showCalcs());
-        
-        this.data.img.loadPixels();
-
         let pixelArray = [];
-        for (let y = 0; y < this.data.img.height; y++) {
+        
+        for (let y = 0; y < this.imageSize.y; y++) {
             let row = [];
-            for (let x = 0; x < this.data.img.width; x++) {
-                let index = (x + y * this.data.img.width) * 4;
-                let grayValue = this.data.img.pixels[index];
+            for (let x = 0; x < this.imageSize.x; x++) {
+                let index = (x+y*this.imageSize.y)*4;
+                let grayValue = this.imageData[index];
                 row.push(grayValue);
             }
             pixelArray.push(row);
         }
-        this.data.compression_result = null;
-
-        ImageProcessor.compressImage(pixelArray, this.imageSize.x, this.imageSize.y).then(v => this.data.compression_result = v);
+        this.compression_result = null;
+        console.log(pixelArray);
+        this.compression_result=await ImageProcessor.compressImage(pixelArray, this.imageSize.x, this.imageSize.y);
+        this.render();
     }
 
-    showCalcs(){
-        if (this.data.compression_result != null && this.index!=null) {
-            document.getElementById("paper_dialog_body").innerHTML=this.data.compression_result.latex_calculations[this.index];
+    static async preProcessImage(rawImage, newWidth, newHeight) {
+        let imgElement = new Image();
+        imgElement.src = rawImage;
+        await new Promise(resolve => imgElement.onload = resolve);
+
+
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
+        ctx.drawImage(imgElement, 0, 0, newWidth, newHeight);
+
+        let imageData = ctx.getImageData(0, 0, newWidth, newHeight);
+        let data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            data[i] = data[i + 1] = data[i + 2] = avg;
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        let newImg = new Image();
+        newImg.src = canvas.toDataURL();
+        newImg.width = newWidth;
+        newImg.height = newHeight;
+        return newImg;
+    }
+
+    static getImageData(image){
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        ctx.drawImage(image, 0, 0);
+
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        return imageData.data; 
+    }
+
+    showCalcs() {
+        if (this.compression_result != null && this.index != null) {
+            document.getElementById("paper_dialog_body").innerHTML = this.data.compression_result.latex_calculations[this.index];
             MathJax.typeset();
             document.getElementById("paper_dialog").showModal();
         }
@@ -44,22 +118,19 @@ export default class ImageProcessingState extends State {
 
     render() {
         this.index = (this.x + this.y * 40) / 8;
-        if (this.data.compression_result == null) {
-            text("loading...", width / 2, height / 2);
-        } else {
-            if (this.x >= this.imageSize.x) {
-                this.x = 0;
-                this.y += this.matrixSize;
-            }
-            if (this.y >= this.imageSize.y) {
-                this.x = this.y = 0;
-            }
-            this.renderImage();
-            this.renderMatrix();
-            if (width > 800) {
-                this.renderMatrixText();
-            }
+
+        if (this.x >= this.imageSize.x) {
+            this.x = 0;
+            this.y += this.matrixSize;
         }
+        if (this.y >= this.imageSize.y) {
+            this.x = this.y = 0;
+        }
+        this.renderImage();
+
+        // this.renderMatrix();
+        
+        
     }
 
     renderMatrixText() {
@@ -102,6 +173,7 @@ export default class ImageProcessingState extends State {
 
     nextStep() {
         this.x += this.matrixSize;
+        this.render();
     }
 
     prevStep() {
@@ -113,16 +185,26 @@ export default class ImageProcessingState extends State {
         if (this.y < 0) {
             this.y = 0;
         }
+        this.render();
     }
 
     renderImage() {
-        image(this.data.img, this.imageOffset.x, this.imageOffset.y);
+        const matrixColor = 'rgb(198, 69, 76)';
+        this.canvas.width=this.img.width;
+        this.canvas.height=this.img.height;
+        this.ctx.drawImage(this.img, 0, 0, 320, 320);
+        this.ctx.fillStyle= "#00000000";
+        this.ctx.strokeStyle= matrixColor;
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeRect(this.x, this.y, this.x+8, this.y+8);
     }
 
     renderMatrix() {
+        
+
         noFill();
         strokeWeight(1);
-        stroke('rgb(198, 69, 76)');
+        stroke(matrixColor);
 
         line(this.x + this.imageOffset.x, this.y + this.imageOffset.y, this.matrixZoom.x, this.matrixZoom.y);
         line(this.x + this.imageOffset.x + this.matrixSize, this.y + this.imageOffset.y, this.matrixZoom.x + this.matrixSize * this.matrixScale, this.matrixZoom.y);
@@ -130,7 +212,7 @@ export default class ImageProcessingState extends State {
         line(this.x + this.imageOffset.x + this.matrixSize, this.y + this.imageOffset.y + this.matrixSize, this.matrixZoom.x + this.matrixSize * this.matrixScale, this.matrixZoom.y + this.matrixSize * this.matrixScale);
 
         strokeWeight(2);
-        stroke('rgb(198, 69, 76)');
+        stroke(matrixColor);
         square(this.imageOffset.x + this.x, this.imageOffset.y + this.y, this.matrixSize);
         for (let i = 0; i < this.matrixSize; i++) {
             for (let j = 0; j < this.matrixSize; j++) {
@@ -151,7 +233,7 @@ export default class ImageProcessingState extends State {
             for (let j = 0; j < this.matrixSize; j++) {
                 let px = this.data.img.get(this.x + i, this.y + j);
 
-                stroke('rgb(198, 69, 76)');
+                stroke(matrixColor);
                 strokeWeight(1);
                 fill(px);
                 square(this.matrixZoom.x + i * this.matrixScale, this.matrixZoom.y + j * this.matrixScale, this.matrixScale);
@@ -168,7 +250,8 @@ export default class ImageProcessingState extends State {
         // width/2-250
         this.imageOffset = createVector(30, (height - this.imageSize.y) / 2);
         this.data.img.resize(this.imageSize.x, this.imageSize.y);
-
+        console.log("resized");
+        console.log(this.data)
         this.baseScale = 16;
         this.matrixSize = 8;
         this.matrixScale = this.baseScale * this.ratio;
@@ -176,4 +259,8 @@ export default class ImageProcessingState extends State {
         this.matrixZoom = createVector(this.matrixOffset.x, this.matrixOffset.y);
 
     }
+
+
+
+
 }

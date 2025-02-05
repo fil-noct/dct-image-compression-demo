@@ -2,7 +2,7 @@ input {
     margin: 10px;
     font-family: 'Montserrat', serif;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 8px;
     background: var(--base-color);
     box-shadow: 4px 4px 10px 2px var(--dark-shadow), 
                 -4px -4px 10px 5px var(--bright-shadow);
@@ -38,7 +38,7 @@ input[type="file"] {
 }
 
 .custom-file-picker {
-    font-weight: bold;
+    font-size: 24px;
     margin: auto;
     border-radius: 5px;
     padding: 16px;
@@ -46,7 +46,6 @@ input[type="file"] {
     box-shadow: 5px 5px 10px var(--dark-shadow),
         -5px -5px 10px var(--bright-shadow);
     cursor: pointer;
-    margin: 20px;
     user-select: none;
     &:active {
         outline: none;

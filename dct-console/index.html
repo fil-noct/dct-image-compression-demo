@@ -4,11 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <title>dct-console</title>
-  
-  <link rel="stylesheet" type="text/css" href="style.css">
 
-  <script src="lib/p5.min.js"></script>
-  <script src="lib/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
 
   <!-- MathJax -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -73,19 +70,43 @@
     </div>
     <div class="console-body">
 
-      <div class="side-bar top">
-          <input type="file" id="img_upload" accept=".png,.jpg" hidden>
-          <div style="display: flex;"><label for="img_upload" class="custom-file-picker">Upload image</label></div>
-        
+      <div class="status-bar">
+        <input type="file" id="img_upload" accept = "image/*" hidden>
+        <div style="display: flex;"><label for="img_upload" class="custom-file-picker">⏏ upload image</label></div>
+        <div class="status-led">
+          <div class="led">
+            <div class="light" id="up_led"></div>
+          </div>
+          <div class="label">uploaded</div>
+        </div>
+
+        <div class="status-led">
+          <div class="led">
+            <div class="light" id="pro_led"></div>
+          </div>
+          <div class="label">processed</div>
+        </div>
+
+        <div class="status-led">
+          <div class="led">
+            <div class="light" id="ready_led"></div>
+          </div>
+          <div class="label">ready</div>
+        </div>
+      </div>
+      <div>
+        <div class="display">
+          <canvas id="img_canvas">
+
+          </canvas>
+        </div>
+
       </div>
 
-      <div class="display" id="p5_canvas">
-        
-      </div>
       <div id="controllers">
-          
-  
-        <div id="process_controller">
+
+
+        <div id="process_controller" > 
           <div class="controller">
             <input type="range" step="">
             <input type="button" value="-" id="slow_down">
@@ -97,14 +118,14 @@
           <div class="controller">
             <input type="button" value="◼" id="stop">
             <input type="button" value="▶" id="play">
-            
+
             <p class="label">Stop/Play</p>
           </div>
 
           <div class="controller">
             <input type="button" value="←" id="prev_step">
             <input type="button" value="→" id="next_step">
-            
+
             <p class="label">Steps</p>
           </div>
 
@@ -112,13 +133,13 @@
             <input type="button" value="Show Steps" id="show_calcs">
           </div>
         </div>
-      
 
+
+      </div>
+      <div class="side-bar bottom">
+        <p>Results</p>
+      </div>
     </div>
-    <div class="side-bar bottom">
-      <p>Results</p>
-    </div>
-  </div>
 </body>
 
 

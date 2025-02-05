@@ -1,5 +1,5 @@
 import DOMUtils from "./utils/DOMUtils.js";
-import ImageProcessorComponent from "./models/ImageProcessorComponent.js";
+import ImageProcessorComponent from "./components/ImageProcessorComponent.js";
 
 let processor;
 
