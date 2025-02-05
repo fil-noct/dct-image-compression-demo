@@ -3,6 +3,7 @@
 @import "css/canvas.css";
 @import "css/paper-dialog.css";
 @import "css/console.css";
+@import "css/matrix.css";
 
 :root{
   --bg: #555f66;
@@ -24,4 +25,10 @@ html, body {
   width: 100vw;
   height: 100vh;
   overflow: auto;
+}
+
+.col{
+  margin:20px;
+  display: flex;
+  flex-direction: column;
 }

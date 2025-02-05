@@ -78,10 +78,9 @@
 .display {
     padding: 10px;
     background: var(--base-color);
-        box-shadow: inset 4px 4px 5px var(--dark-shadow), 
-        inset -4px 4px 5px var(--bright-shadow);
+    box-shadow: inset 4px 4px 5px var(--dark-shadow), 
+    inset -4px 4px 5px var(--bright-shadow);
     border-radius: 10px;
-    margin:20px;
     width: fit-content;
     canvas{
         height: 320px;

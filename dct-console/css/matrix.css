@@ -1,0 +1,22 @@
+.matrix{
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 4px 4px 5px var(--dark-shadow), 
+    inset -4px 4px 5px var(--bright-shadow);
+    border-radius: 10px;
+    padding: 10px;
+    /* background-color: lightcoral; */
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.pixel{
+    height: 16px;
+    width: 16px;
+    margin: 0.5px;
+    /* border-radius: 2px; */
+}

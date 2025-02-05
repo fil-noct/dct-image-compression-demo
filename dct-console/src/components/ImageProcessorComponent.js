@@ -26,8 +26,8 @@ export default class ImageProcessorComponent {
         this.speed = 5;
         this.play = false;
 
-        DOMUtils.setClickEvent("prev_step", this.prevStep);
-        DOMUtils.setClickEvent("next_step", this.nextStep);
+        DOMUtils.setClickEvent("prev_step", () => this.prevStep());
+        DOMUtils.setClickEvent("next_step", () => this.nextStep());
 
         DOMUtils.setClickEvent("play", () => this.togglePlay(true));
         DOMUtils.setClickEvent("stop", () => this.togglePlay(false));
@@ -38,37 +38,40 @@ export default class ImageProcessorComponent {
 
     }
 
-    async init(rawImage){
+    async init(rawImage) {
+        this.matrixSize = 8;
         this.imageSize = { x: 320, y: 320 };
         this.img = await ImageProcessorComponent.preProcessImage(rawImage, this.imageSize.x, this.imageSize.y);
-        this.imageData=ImageProcessorComponent.getImageData(this.img);
-        this.canvas=document.getElementById("img_canvas");
+        this.imageData = ImageProcessorComponent.getImageData(this.img);
+        this.canvas = document.getElementById("img_canvas");
+        this.canvas.width = this.img.width;
+        this.canvas.height = this.img.height;
         this.ctx = this.canvas.getContext("2d");
         this.x = 0;
         this.y = 0;
 
-        let pixelArray = [];
-        
+        this.pixelArray = [];
+
         for (let y = 0; y < this.imageSize.y; y++) {
             let row = [];
             for (let x = 0; x < this.imageSize.x; x++) {
-                let index = (x+y*this.imageSize.y)*4;
+                let index = (x + y * this.imageSize.y) * 4;
                 let grayValue = this.imageData[index];
                 row.push(grayValue);
             }
-            pixelArray.push(row);
+            this.pixelArray.push(row);
         }
         this.compression_result = null;
-        console.log(pixelArray);
-        this.compression_result=await ImageProcessor.compressImage(pixelArray, this.imageSize.x, this.imageSize.y);
+        this.compression_result = await ImageProcessor.compressImage(this.pixelArray, this.imageSize.x, this.imageSize.y);
+        console.log(this.pixelArray)
         this.render();
+        ImageProcessorComponent.enableControllers();
     }
 
     static async preProcessImage(rawImage, newWidth, newHeight) {
         let imgElement = new Image();
         imgElement.src = rawImage;
         await new Promise(resolve => imgElement.onload = resolve);
-
 
         let canvas = document.createElement('canvas');
         let ctx = canvas.getContext('2d');
@@ -95,7 +98,7 @@ export default class ImageProcessorComponent {
         return newImg;
     }
 
-    static getImageData(image){
+    static getImageData(image) {
         let canvas = document.createElement('canvas');
         let ctx = canvas.getContext('2d');
 
@@ -105,7 +108,7 @@ export default class ImageProcessorComponent {
         ctx.drawImage(image, 0, 0);
 
         let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        return imageData.data; 
+        return imageData.data;
     }
 
     showCalcs() {
@@ -117,7 +120,6 @@ export default class ImageProcessorComponent {
     }
 
     render() {
-        this.index = (this.x + this.y * 40) / 8;
 
         if (this.x >= this.imageSize.x) {
             this.x = 0;
@@ -126,11 +128,11 @@ export default class ImageProcessorComponent {
         if (this.y >= this.imageSize.y) {
             this.x = this.y = 0;
         }
-        this.renderImage();
+        
+        this.index = (this.x + this.y * 40) / 8;
 
-        // this.renderMatrix();
-        
-        
+        this.renderImage();
+        this.renderMatrix();
     }
 
     renderMatrixText() {
@@ -139,10 +141,10 @@ export default class ImageProcessorComponent {
 
         textAlign(LEFT);
         text("original dct matrix", this.matrixOffset.x + this.matrixScale * this.matrixSize + 20, this.matrixZoom.y - 10);
-        text("quantizied dct matrix", this.matrixOffset.x + this.matrixScale * this.matrixSize + 20, this.matrixZoom.y - 10 + this.matrixScale * 8 + 50);
+        text("quantizied dct matrix", this.matrixOffset.x + this.matrixScale * this.matrixSize + 20, this.matrixZoom.y - 10 + this.matrixScale * this.matrixSize + 50);
 
         textFont('Courier New');
-        textSize(8 * this.ratio);
+        textSize(this.matrixSize * this.ratio);
         let dct_matrix = this.data.compression_result.dct_matrices[this.index];
         let compressed_dct_matrix = this.data.compression_result.compressed_dct_matrices[this.index];
         for (let i = 0; i < compressed_dct_matrix.length; i++) {
@@ -166,11 +168,6 @@ export default class ImageProcessorComponent {
 
     }
 
-
-    isEnded() {
-        return this.data.compression_result != null;
-    }
-
     nextStep() {
         this.x += this.matrixSize;
         this.render();
@@ -189,78 +186,41 @@ export default class ImageProcessorComponent {
     }
 
     renderImage() {
-        const matrixColor = 'rgb(198, 69, 76)';
-        this.canvas.width=this.img.width;
-        this.canvas.height=this.img.height;
+        const matrixColor = 'rgb(9, 212, 26)';
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.img, 0, 0, 320, 320);
-        this.ctx.fillStyle= "#00000000";
-        this.ctx.strokeStyle= matrixColor;
-        this.ctx.lineWidth = 2;
-        this.ctx.strokeRect(this.x, this.y, this.x+8, this.y+8);
+        this.ctx.fillStyle = "#00000000";
+        this.ctx.strokeStyle = matrixColor;
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeRect(this.x, this.y, this.matrixSize, this.matrixSize);
     }
 
     renderMatrix() {
+        const matrix = document.getElementById("original_matrix");
+        let j = 0;
+        for (let row of matrix.children) {
+            let i=0;
+            for (let pixel of row.children) {
+                const color = this.pixelArray[this.y + j][this.x + i];
+                pixel.style.backgroundColor = "rgb(" + color.toString() + "," + color.toString() + "," + color.toString() + ")";
+                i++;
+            }
+            j++;
+        }
+        let compressed_matrix_data = this.compression_result.compressed_image_submatrices[this.index];
+        const compressedMatrix = document.getElementById("compressed_matrix");
+        j = 0;
+        for (let row of compressedMatrix.children) {
+            let i=0;
+            for (let pixel of row.children) {
+                const color = compressed_matrix_data[j][i];
+                pixel.style.backgroundColor = "rgb(" + color.toString() + "," + color.toString() + "," + color.toString() + ")";
+                i++;
+            }
+            j++;
+        }
         
-
-        noFill();
-        strokeWeight(1);
-        stroke(matrixColor);
-
-        line(this.x + this.imageOffset.x, this.y + this.imageOffset.y, this.matrixZoom.x, this.matrixZoom.y);
-        line(this.x + this.imageOffset.x + this.matrixSize, this.y + this.imageOffset.y, this.matrixZoom.x + this.matrixSize * this.matrixScale, this.matrixZoom.y);
-        line(this.x + this.imageOffset.x, this.y + this.imageOffset.y + this.matrixSize, this.matrixZoom.x, this.matrixZoom.y + this.matrixSize * this.matrixScale);
-        line(this.x + this.imageOffset.x + this.matrixSize, this.y + this.imageOffset.y + this.matrixSize, this.matrixZoom.x + this.matrixSize * this.matrixScale, this.matrixZoom.y + this.matrixSize * this.matrixScale);
-
-        strokeWeight(2);
-        stroke(matrixColor);
-        square(this.imageOffset.x + this.x, this.imageOffset.y + this.y, this.matrixSize);
-        for (let i = 0; i < this.matrixSize; i++) {
-            for (let j = 0; j < this.matrixSize; j++) {
-                let px = this.data.img.get(this.x + i, this.y + j);
-                strokeWeight(1);
-                fill(px);
-                square(this.matrixZoom.x + i * this.matrixScale, this.matrixZoom.y + j * this.matrixScale, this.matrixScale)
-            }
-        }
-        let compressed_matrix = this.data.compression_result.compressed_image_submatrices[this.index];
-        textAlign(LEFT);
-        fill(0);
-        stroke(0);
-        text("original", this.matrixZoom.x, this.matrixZoom.y - 10);
-        text("compressed", this.matrixZoom.x, this.matrixZoom.y - 10 + this.matrixScale * 8 + 50);
-        textAlign(CENTER);
-        for (let i = 0; i < this.matrixSize; i++) {
-            for (let j = 0; j < this.matrixSize; j++) {
-                let px = this.data.img.get(this.x + i, this.y + j);
-
-                stroke(matrixColor);
-                strokeWeight(1);
-                fill(px);
-                square(this.matrixZoom.x + i * this.matrixScale, this.matrixZoom.y + j * this.matrixScale, this.matrixScale);
-                // stroke(0,0,255);
-                px = compressed_matrix[j][i];
-                fill(px);
-                square(this.matrixZoom.x + i * this.matrixScale, this.matrixZoom.y + j * this.matrixScale + this.matrixScale * 8 + 50, this.matrixScale);
-            }
-        }
+        DOMUtils.setInnerHTML("single_compression_rate", "100%");
+        
     }
-
-    refreshSize() {
-        this.ratio = width / 600;
-        // width/2-250
-        this.imageOffset = createVector(30, (height - this.imageSize.y) / 2);
-        this.data.img.resize(this.imageSize.x, this.imageSize.y);
-        console.log("resized");
-        console.log(this.data)
-        this.baseScale = 16;
-        this.matrixSize = 8;
-        this.matrixScale = this.baseScale * this.ratio;
-        this.matrixOffset = createVector(this.imageSize.x + this.imageOffset.x + 30, (height - this.matrixScale * this.matrixSize * 2) / 2 - 20)
-        this.matrixZoom = createVector(this.matrixOffset.x, this.matrixOffset.y);
-
-    }
-
-
-
-
 }

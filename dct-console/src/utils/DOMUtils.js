@@ -7,8 +7,12 @@ export default class DOMUtils{
         document.getElementById(id).innerHTML=html;
     }
 
-    static disableInput(id, disabled){
-        document.getElementById(id).disabled=disabled;
+    static disableInput(id){
+        document.getElementById(id).disabled=true;
+    }
+    
+    static enableInput(id){
+        document.getElementById(id).disabled=false;
     }
 
     static show(id){

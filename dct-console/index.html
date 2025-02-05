@@ -71,13 +71,13 @@
     <div class="console-body">
 
       <div class="status-bar">
-        <input type="file" id="img_upload" accept = "image/*" hidden>
-        <div style="display: flex;"><label for="img_upload" class="custom-file-picker">⏏ upload image</label></div>
+        <input type="file" id="img_upload" accept="image/*" hidden>
+        <div style="display: flex;"><label for="img_upload" class="custom-file-picker">⏏ load image</label></div>
         <div class="status-led">
           <div class="led">
             <div class="light" id="up_led"></div>
           </div>
-          <div class="label">uploaded</div>
+          <div class="label">loaded</div>
         </div>
 
         <div class="status-led">
@@ -94,52 +94,259 @@
           <div class="label">ready</div>
         </div>
       </div>
-      <div>
-        <div class="display">
-          <canvas id="img_canvas">
 
-          </canvas>
+      <div style="display:flex;flex-direction: row;">
+        <div class="col">
+          <div class="display">
+            <canvas id="img_canvas">
+
+            </canvas>
+          </div>
+          <div id="controllers">
+            <div style="display: flex;justify-content: space-evenly;">
+              <div class="controller">
+                <div class="buttons">
+                  <input type="button" value="←" id="prev_step">
+                </div>
+                <p class="label">prev</p>
+              </div>
+
+              <div class="controller">
+                <div class="buttons">
+                  <input type="button" value="◼" id="stop">
+                  <input type="button" value="▶" id="play">
+                </div>
+                <p class="label">Stop/Play</p>
+              </div>
+
+              <div class="controller">
+                <div class="buttons">
+                  <input type="button" value="→" id="next_step">
+                </div>
+                <p class="label">next</p>
+              </div>
+
+            </div>
+
+            <div style="display: flex;justify-content: space-evenly;">
+              <div class="controller">
+                <div class="buttons">
+
+                  <input type="button" value="-" id="slow_down">
+                  <input type="range" step="">
+                  <div id="speed" class="label">&nbsp;</div>
+                  <input type="button" value="+" id="speed_up">
+                </div>
+                <div class="label">speed</div>
+              </div>
+
+              
+            </div>
+
+            
+          </div>
         </div>
 
-      </div>
-
-      <div id="controllers">
+        <div class="col">
 
 
-        <div id="process_controller" > 
-          <div class="controller">
-            <input type="range" step="">
-            <input type="button" value="-" id="slow_down">
-            <div id="speed" class="label">&nbsp;</div>
-            <input type="button" value="+" id="speed_up">
-            <div class="label">speed</div>
+          <p class="label">original matrix</p>
+          <div class="row">
+            <div class="matrix" id="original_matrix">
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="label" style="margin: auto;">compression rate</p>
+          <div class="display" style="margin: auto;" id="single_compression_rate">
+            
+          </div>
+
+          <p class="label">compressed matrix</p>
+          <div class="row">
+            
+            <div class="matrix" id="compressed_matrix">
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+              <div class="row">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+              </div>
+            </div>
           </div>
 
           <div class="controller">
-            <input type="button" value="◼" id="stop">
-            <input type="button" value="▶" id="play">
-
-            <p class="label">Stop/Play</p>
+            <div class="buttons">
+              <input type="button" value="+-*/" id="show_calcs">
+            </div>
+            <div class="label">show calcs</div>
           </div>
 
-          <div class="controller">
-            <input type="button" value="←" id="prev_step">
-            <input type="button" value="→" id="next_step">
-
-            <p class="label">Steps</p>
-          </div>
-
-          <div class="controller">
-            <input type="button" value="Show Steps" id="show_calcs">
-          </div>
         </div>
-
-
       </div>
+
+
       <div class="side-bar bottom">
-        <p>Results</p>
+        <p class="label">RESULTS</p>
       </div>
+
+
     </div>
+
+  </div>
 </body>
 
 

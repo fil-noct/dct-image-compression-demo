@@ -4,22 +4,19 @@ input {
     font-weight: bold;
     border-radius: 8px;
     background: var(--base-color);
-    box-shadow: 4px 4px 10px 2px var(--dark-shadow), 
-                -4px -4px 10px 5px var(--bright-shadow);
+    box-shadow: 4px 4px 10px 2px var(--dark-shadow),
+        -4px -4px 10px 5px var(--bright-shadow);
 
     &:disabled,
     &:active {
         outline: none;
         background: var(--base-color);
-        box-shadow: inset 4px 4px 10px 2px var(--dark-shadow), 
-        inset -4px 10px 5px var(--bright-shadow);
+        box-shadow: inset 4px 4px 10px 2px var(--dark-shadow),
+            inset -4px 10px 5px var(--bright-shadow);
     }
 }
 
-
 input[type=button] {
-    font-weight: bold;
-
     border: none;
     color: black;
     padding: 8px 16px;
@@ -31,14 +28,12 @@ input[type=button]:disabled {
     cursor: default;
 }
 
-
-
 input[type="file"] {
     appearance: none;
 }
 
 .custom-file-picker {
-    font-size: 24px;
+    font-size: 16px;
     margin: auto;
     border-radius: 5px;
     padding: 16px;
@@ -47,6 +42,8 @@ input[type="file"] {
         -5px -5px 10px var(--bright-shadow);
     cursor: pointer;
     user-select: none;
+    text-transform: uppercase;
+    
     &:active {
         outline: none;
         background: var(--base-color);
@@ -58,7 +55,6 @@ input[type="file"] {
 #up_img {
     box-shadow: inset 9px 9px 18px var(--dark-shadow), inset -9px -9px 18px var(--bright-shadow);
 }
-
 
 input[type="range"] {
     appearance: none;
@@ -80,37 +76,21 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
-
-#state_title {
-    text-align: center;
-    max-width: 400px;
-    color: #666;
-}
-
-#process_controller {
-    padding: 0px 20px;
-    margin: auto;
+#controllers {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
 }
-
-#upload_controller {
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 600px;
-    margin: auto;
-}
-
 
 .controller {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    position: relative;
-
 }
 
 #speed {
@@ -119,8 +99,8 @@ input[type="range"]::-webkit-slider-thumb {
     user-select: none;
 }
 
-
 .label {
+    margin: 0;
     user-select: none;
     text-transform: uppercase;
     color: #666;

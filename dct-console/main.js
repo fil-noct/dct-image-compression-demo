@@ -1,5 +1,5 @@
 import ImageProcessorComponent from "./src/components/ImageProcessorComponent.js";
-
+ImageProcessorComponent.disableControllers();
 let state = {
   upload: false,
   processed: false,
@@ -28,8 +28,6 @@ function updateState(){
   }
 }
 
-
-
 const input = document.getElementById("img_upload");
 
 input.addEventListener("cancel", () => {
@@ -54,12 +52,6 @@ input.addEventListener("change", () => {
           await processor.init(rawImg);
           state.ready = true;
           updateState();
-          // loadImage(reader.result, (img) => {
-          //     img.loadPixels();
-          //     img.resize(320, 320);
-          //     img.filter(GRAY);
-          //     
-          // });
       };
       reader.readAsDataURL(file);
     } else {
@@ -67,6 +59,3 @@ input.addEventListener("change", () => {
     }
   }
 });
-
-
-
