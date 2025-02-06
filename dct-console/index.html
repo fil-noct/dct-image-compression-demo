@@ -97,7 +97,9 @@
       <hr>
       <div class="row">
         <div class="col">
+          <p>Click on the image to move the cursor</p>
           <div class="display">
+
             <canvas id="img_canvas">
             </canvas>
           </div>
@@ -130,24 +132,25 @@
               <div class="controller">
                 <div class="buttons">
                   <input type="button" value="-" id="slow_down">
-                  <input type="range" step="1" min="-5" max="5" id="speed_range">
-                  <div id="speed" class="label">&nbsp;</div>
+                  <input type="range" step="1" min="1" max="11" id="speed_range">
                   <input type="button" value="+" id="speed_up">
                 </div>
                 <div class="label">speed</div>
               </div>
             </div>
 
-            <div class="controller">
+            <div class="controller" style="display: none;">
               <div class="buttons">
                 <input type="button" value="Show" id="show_calcs">
               </div>
-              <div class="label">calculations</div>
+              <div class="label">calcs</div>
             </div>
 
           </div>
         </div>
+
         <div class="col">
+
           <div class="row">
             <div class="col" style="align-self: center;">
               <div class="matrix" id="original_matrix">
@@ -318,11 +321,13 @@
                   <div class="number">&nbsp;</div>
                 </div>
               </div>
-              <p class="label">dct matrix transform</p>
+              <p class="label">dct matrix</p>
             </div>
           </div>
-
-          <hr>
+          <div class="col" style="align-self: flex-start;margin: 0; margin-left: 70px; ">
+            <div id="single_compression_reduction" class=" display">--.--%</div>
+            <p class="label">Reduction</p>
+          </div>
 
           <div class="row">
 
@@ -495,7 +500,8 @@
                   <div class="number">&nbsp;</div>
                 </div>
               </div>
-              <p class="label">dct compressed matrix transform</p>
+              <p class="label">quantized dct matrix
+              </p>
             </div>
 
           </div>
@@ -506,6 +512,22 @@
 
       <div class="result-bar">
         <p class="label">RESULTS</p>
+
+        <div class="row">
+          <div class="col">
+            <div id="compression_reduction" class=" display">--.--%</div>
+            <p class="label">Reduction</p>
+          </div>
+          <div class="col">
+            <div class="row" style="align-items: center;">
+
+              <div id="compression_ratio" class="display">-</div>
+              <div>:</div>
+              <div class="display">1</div>
+            </div>
+            <p class="label">Ratio</p>
+          </div>
+        </div>
       </div>
     </div>
 

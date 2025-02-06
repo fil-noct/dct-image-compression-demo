@@ -32,12 +32,15 @@ const input = document.getElementById("img_upload");
 
 input.addEventListener("cancel", () => {
   console.error("Invalid image format");
-  ImageProcessorComponent.disableControllers();
 });
 
 input.addEventListener("change", () => {
+
+  if(processor!=undefined){
+    processor.stop();
+  }
+
   state.upload = state.processed = state.ready = false;
-  ImageProcessorComponent.disableControllers();
   if (input.files.length == 1) {
     if (input.files[0].type.startsWith('image/')) {
       const file = input.files[0];

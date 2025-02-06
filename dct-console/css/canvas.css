@@ -2,4 +2,5 @@ canvas {
     margin: 0;
     display: block;
     /* border-radius: 6px; */
+    cursor: pointer;
 }

@@ -6,19 +6,19 @@ export default class ImageProcessorComponent {
     static controllers = ["prev_step", "next_step", "play", "stop", "speed_up", "slow_down", "show_calcs", "speed_range"];
 
     static disableControllers() {
-        for(let controller of this.controllers){
+        for (let controller of this.controllers) {
             DOMUtils.disableInput(controller);
         }
     }
 
     static enableControllers() {
-        for(let controller of this.controllers){
+        for (let controller of this.controllers) {
             DOMUtils.enableInput(controller);
         }
     }
 
     constructor() {
-        this.speed = 5;
+        this.speed = 6;
         this.play = false;
         this.matrixSize = 8;
         this.canvas = document.getElementById("img_canvas");
@@ -28,17 +28,22 @@ export default class ImageProcessorComponent {
         DOMUtils.setClickEvent("next_step", () => this.nextStep());
 
         DOMUtils.setClickEvent("play", () => this.togglePlay(true));
+
         DOMUtils.setClickEvent("stop", () => this.togglePlay(false));
 
         DOMUtils.setClickEvent("speed_up", () => this.changeSpeed(1));
         DOMUtils.setClickEvent("slow_down", () => this.changeSpeed(-1));
-        DOMUtils.setInnerHTML("speed", this.speed);
+
+        document.getElementById("speed_range").onchange = () => {
+            this.speed = document.getElementById("speed_range").value;
+            if (this.play)
+                this.autoplay();
+        }
     }
 
-    setPosition(x, y){
-        console.log("pos",x, y);
-        this.x = Math.round(x/this.matrixSize) * this.matrixSize;
-        this.y = Math.round(y/this.matrixSize) * this.matrixSize;
+    setPosition(x, y) {
+        this.x = Math.floor(x / this.matrixSize) * this.matrixSize;
+        this.y = Math.floor(y / this.matrixSize) * this.matrixSize;
         this.render();
     }
 
@@ -64,8 +69,17 @@ export default class ImageProcessorComponent {
         }
         this.compression_result = null;
         this.compression_result = await ImageProcessor.compressImage(this.pixelArray, this.imageSize.x, this.imageSize.y);
+
+        this.rate = (320 * 320 - this.compression_result.dct_zero_count) /
+            (320 * 320 - this.compression_result.compressed_dct_zero_count);
+
         this.render();
+
         ImageProcessorComponent.enableControllers();
+        DOMUtils.disableInput("stop");
+        DOMUtils.setInnerHTML("compression_ratio", this.rate.toFixed(2).toString());
+        
+        DOMUtils.setInnerHTML("compression_reduction", ((1-1/this.rate)*100).toFixed(2).toString()+" %")
     }
 
     static async preProcessImage(rawImage, newWidth, newHeight) {
@@ -105,7 +119,6 @@ export default class ImageProcessorComponent {
 
         canvas.width = image.width;
         canvas.height = image.height;
-
         ctx.drawImage(image, 0, 0);
 
         let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -128,43 +141,52 @@ export default class ImageProcessorComponent {
         if (this.y >= this.imageSize.y) {
             this.x = this.y = 0;
         }
-        
+
         this.index = (this.x + this.y * 40) / 8;
 
         this.renderImage();
         this.renderMatrix();
         this.renderMatrixText();
-        this.updateControls();
     }
 
     renderMatrixText() {
         const dctMatrix = document.getElementById("dct_matrix");
         const dctMatrixCompressed = document.getElementById("dct_matrix_compressed");
-        
+
         let dct_matrix = this.compression_result.dct_matrices[this.index];
         let compressed_dct_matrix = this.compression_result.compressed_dct_matrices[this.index];
+
         
+        let dct_zeros=0;
         let j = 0;
         for (let row of dctMatrix.children) {
-            let i=0;
+            let i = 0;
             for (let number of row.children) {
-                const data = Math.round( dct_matrix[j][i]);
-                number.innerHTML=data;
+                const data = Math.round(dct_matrix[j][i]);
+                number.innerHTML = data;
+                if(data==0) dct_zeros++;
                 i++;
             }
             j++;
         }
 
-        j=0;
+        let compressed_dct_zeros=0;
+        j = 0;
         for (let row of dctMatrixCompressed.children) {
-            let i=0;
+            let i = 0;
             for (let number of row.children) {
-                const data =  Math.round(compressed_dct_matrix[j][i]);
-                number.innerHTML=data;
+                const data = Math.round(compressed_dct_matrix[j][i]);
+                number.innerHTML = data;
+                if(data==0) compressed_dct_zeros++;
                 i++;
             }
             j++;
         }
+
+        let rate = (64 - dct_zeros) / (64 - compressed_dct_zeros);
+
+
+        DOMUtils.setInnerHTML("single_compression_reduction", ((1-1/rate)*100).toFixed(2).toString()+" %");
 
     }
 
@@ -197,9 +219,10 @@ export default class ImageProcessorComponent {
 
     renderMatrix() {
         const matrix = document.getElementById("original_matrix");
+        
         let j = 0;
         for (let row of matrix.children) {
-            let i=0;
+            let i = 0;
             for (let pixel of row.children) {
                 const color = this.pixelArray[this.y + j][this.x + i];
                 pixel.style.backgroundColor = "rgb(" + color.toString() + "," + color.toString() + "," + color.toString() + ")";
@@ -211,7 +234,7 @@ export default class ImageProcessorComponent {
         const compressedMatrix = document.getElementById("compressed_matrix");
         j = 0;
         for (let row of compressedMatrix.children) {
-            let i=0;
+            let i = 0;
             for (let pixel of row.children) {
                 const color = compressed_matrix_data[j][i];
                 pixel.style.backgroundColor = "rgb(" + color.toString() + "," + color.toString() + "," + color.toString() + ")";
@@ -219,27 +242,59 @@ export default class ImageProcessorComponent {
             }
             j++;
         }
-        
-        // DOMUtils.setInnerHTML("single_compression_rate", "100%");
-        
+
     }
 
     togglePlay(state) {
-      this.play = state;
-      if (this.play) {
-        frameRate(1 * this.speed);
-      } else {
-        frameRate(10);
-      }
-      updateControls();
+        this.play = state;
+        if (this.play) {
+            this.autoplay();
+        } else {
+            this.stop();
+        }
+        this.updateControls();
     }
-    
+
     updateControls() {
-      DOMUtils.disableInput("play", this.play);
-      DOMUtils.disableInput("stop", !this.play);
-    
-      DOMUtils.disableInput("slow_down", this.speed <= 0.25);
-      DOMUtils.disableInput("speed_up", this.speed >= 50);
-      DOMUtils.setInnerHTML("speed", this.speed);
+        if (this.play) {
+            DOMUtils.disableInput("play");
+            DOMUtils.enableInput("stop");
+        } else {
+            DOMUtils.disableInput("stop");
+            DOMUtils.enableInput("play");
+        }
+
+        if (this.speed == 1) {
+            DOMUtils.disableInput("slow_down");
+        } else {
+            DOMUtils.enableInput("slow_down");
+        }
+
+        if (this.speed == 11) {
+            DOMUtils.disableInput("speed_up");
+        } else {
+            DOMUtils.enableInput("speed_up");
+        }
+
+        document.getElementById("speed_range").value = this.speed;
+
+    }
+
+    autoplay() {
+        clearInterval(this.interval);
+        this.interval = setInterval(() => this.nextStep(), (1 / this.speed) * 1000);
+    }
+
+    stop() {
+        clearInterval(this.interval);
+    }
+
+    changeSpeed(sign) {
+        let delta = 1;
+        this.speed += delta * sign;
+        this.updateControls();
+        if (this.play) {
+            this.autoplay();
+        }
     }
 }

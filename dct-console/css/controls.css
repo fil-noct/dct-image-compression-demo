@@ -43,7 +43,7 @@ input[type="file"] {
     cursor: pointer;
     user-select: none;
     text-transform: uppercase;
-    
+
     &:active {
         outline: none;
         background: var(--base-color);
@@ -64,10 +64,11 @@ input[type="range"] {
     border-radius: 5px;
     box-shadow: inset 3px 3px 6px var(--dark-shadow), inset -3px -3px 6px var(--bright-shadow);
     outline: none;
+
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    appearance: none;
     width: 10px;
     height: 20px;
     background: var(--base-color);
@@ -91,12 +92,6 @@ input[type="range"]::-webkit-slider-thumb {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-#speed {
-    width: 50px;
-    text-align: center;
-    user-select: none;
 }
 
 .label {
