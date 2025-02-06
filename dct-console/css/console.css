@@ -21,68 +21,65 @@
     box-shadow: 9px 9px 18px #c3c3c3, -9px -9px 18px #c3c3c3;
 }
 
-.status-bar{
-    margin:20px;
+.status-bar {
+    margin: 20px;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 0px;
 }
 
-.status-led{
+.status-led {
     display: flex;
     align-items: center;
     margin: 20px;
 
-    .led{
+    .led {
         border-radius: 10px;
         display: flex;
         margin: 10px;
         width: 30px;
         height: 30px;
-        color:gainsboro;
-        box-shadow: inset 4px 4px 10px var(--dark-shadow), 
-                    inset -4px -4px 10px  var(--bright-shadow);
-        
-        .light{
+        color: gainsboro;
+        box-shadow: inset 4px 4px 10px var(--dark-shadow),
+            inset -4px -4px 10px var(--bright-shadow);
+
+        .light {
             border-radius: 3px;
             margin: auto;
             width: 10px;
             height: 10px;
             background-color: rgba(128, 128, 128, 0.232);
             /* transition: 200ms; */
-            
-            &.on{
-                background: radial-gradient(#aaffaa, #00d600a4) ;
-                box-shadow:0px 0px 12px 6px #00d600a4;
+
+            &.on {
+                background: radial-gradient(#aaffaa, var(--light-color));
+                box-shadow: 0px 0px 12px 6px var(--light-color);
 
             }
         }
     }
-    
+
 }
 
-.side-bar {
+.result-bar {
+    margin: 20px;
     display: flex;
     justify-content: space-around;
     border-radius: 10px;
     width: 100%;
-    &.top {
-        margin-bottom: 20px;
-    }
-
-    &.bottom {
-        margin-top: 20px;
-    }
+    margin-top: 0px;
 
 }
 
 .display {
     padding: 10px;
     background: var(--base-color);
-    box-shadow: inset 4px 4px 5px var(--dark-shadow), 
-    inset -4px 4px 5px var(--bright-shadow);
+    box-shadow: inset 4px 4px 5px var(--dark-shadow),
+        inset -4px 4px 5px var(--bright-shadow);
     border-radius: 10px;
     width: fit-content;
-    canvas{
+
+    canvas {
         height: 320px;
         width: 320px;
     }

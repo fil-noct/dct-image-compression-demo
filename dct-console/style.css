@@ -5,8 +5,10 @@
 @import "css/console.css";
 @import "css/matrix.css";
 
+/* https://coolors.co/519872-db5375-dfdedd-98ff54-3a3238 */
 :root{
-  --bg: #555f66;
+  /* --bg: #555f66; */
+  --bg: #3A3238;
   --color: #dfdedd;
   --console: #cdcbc8;
   --hover-color: #e5e2de;
@@ -15,6 +17,10 @@
   --base-color: #dfdedd;
   --dark-shadow: #bebebe;
   --bright-shadow: #f8f8f8;
+
+  --light-color: #98FF54;
+  --pixel-color: #DB5375;
+  --number-color: #1E152A69;
 } 
 
 html, body {
@@ -31,4 +37,9 @@ html, body {
   margin:20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+hr{
+  color: #666;margin-left: 20px;margin-right: 20px;
 }

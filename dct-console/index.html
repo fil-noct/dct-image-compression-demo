@@ -94,12 +94,11 @@
           <div class="label">ready</div>
         </div>
       </div>
-
-      <div style="display:flex;flex-direction: row;">
+      <hr>
+      <div class="row">
         <div class="col">
           <div class="display">
             <canvas id="img_canvas">
-
             </canvas>
           </div>
           <div id="controllers">
@@ -125,226 +124,391 @@
                 </div>
                 <p class="label">next</p>
               </div>
-
             </div>
 
             <div style="display: flex;justify-content: space-evenly;">
               <div class="controller">
                 <div class="buttons">
-
                   <input type="button" value="-" id="slow_down">
-                  <input type="range" step="">
+                  <input type="range" step="1" min="-5" max="5" id="speed_range">
                   <div id="speed" class="label">&nbsp;</div>
                   <input type="button" value="+" id="speed_up">
                 </div>
                 <div class="label">speed</div>
               </div>
-
-              
             </div>
 
-            
+            <div class="controller">
+              <div class="buttons">
+                <input type="button" value="Show" id="show_calcs">
+              </div>
+              <div class="label">calculations</div>
+            </div>
+
           </div>
         </div>
-
         <div class="col">
-
-
-          <p class="label">original matrix</p>
           <div class="row">
-            <div class="matrix" id="original_matrix">
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
+            <div class="col" style="align-self: center;">
+              <div class="matrix" id="original_matrix">
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
               </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
+              <p class="label">original matrix</p>
+            </div>
+
+            <div class="col">
+              <div class="matrix" id="dct_matrix">
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
               </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
+              <p class="label">dct matrix transform</p>
             </div>
           </div>
 
-          <p class="label" style="margin: auto;">compression rate</p>
-          <div class="display" style="margin: auto;" id="single_compression_rate">
-            
-          </div>
+          <hr>
 
-          <p class="label">compressed matrix</p>
           <div class="row">
-            
-            <div class="matrix" id="compressed_matrix">
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-              <div class="row">
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-                <div class="pixel"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="controller">
-            <div class="buttons">
-              <input type="button" value="+-*/" id="show_calcs">
+            <div class="col" style="align-self: center;">
+              <div class="matrix" id="compressed_matrix">
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+                <div class="row">
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                  <div class="pixel"></div>
+                </div>
+              </div>
+              <p class="label">compressed matrix</p>
             </div>
-            <div class="label">show calcs</div>
-          </div>
 
+            <div class="col">
+              <div class="matrix" id="dct_matrix_compressed">
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+                <div class="row-number">
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                  <div class="number">&nbsp;</div>
+                </div>
+              </div>
+              <p class="label">dct compressed matrix transform</p>
+            </div>
+
+          </div>
         </div>
       </div>
 
+      <hr>
 
-      <div class="side-bar bottom">
+      <div class="result-bar">
         <p class="label">RESULTS</p>
       </div>
-
-
     </div>
+
 
   </div>
 </body>
