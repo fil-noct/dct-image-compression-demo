@@ -80,10 +80,23 @@
     border-radius: 10px;
     width: fit-content;
 
-    canvas {
+    #img_canvas {
         height: 320px;
         width: 320px;
     }
+
+    #zoomed_img_canvas,
+    #zoomed_compressed_img_canvas {
+        height: 320px;
+        width: 320px;
+    }
+
+    #zoom_canvas {
+        height: 160px;
+        width: 160px;
+    }
+
+
 }
 
 .screws {
@@ -120,4 +133,9 @@
     &.right {
         right: 20px;
     }
+}
+
+.zoom-image {
+    align-items: center;
+    justify-content: space-around;
 }

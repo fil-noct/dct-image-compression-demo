@@ -6,60 +6,9 @@
   <title>dct-console</title>
 
   <link rel="stylesheet" type="text/css" href="style.css">
-
-  <!-- MathJax -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    MathJax = {
-      options: {
-        enableMenu: true,
-      }
-    };
-  </script>
 </head>
 
 <body>
-  <!-- <dialog id="paper_dialog">
-    <div class="dialog_body paper_texture" id="paper_dialog_body">
-      <p>coses scritte lunge lunghe lunegheeeeeecoses scritte lunge lunghe lunegheeeeeecoses scritte lunge lunghe
-        lunegheeeeeecoses scritte lunge lunghe lunegheeeeeecoses scritte lunge lunghe lunegheeeeee</p>
-      <p>altre cose lunghe lungeh lunghe</p>
-      <p>coses scritte lunge lunghe lunegheeeeeecoses scritte lunge lunghe lunegheeeeeecoses scritte lunge lunghe
-        lunegheeeeeecoses scritte lunge lunghe lunegheeeeeecoses scritte lunge lunghe lunegheeeeee</p>
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum."</p>
-      <p>\[ x=
-        \begin{pmatrix}
-        a_{11} & a_{12} & a_{13} & a_{14} & a_{15} & a_{16} & a_{17} & a_{18} \\
-        a_{21} & a_{22} & a_{23} & a_{24} & a_{25} & a_{26} & a_{27} & a_{28} \\
-        a_{31} & a_{32} & a_{33} & a_{34} & a_{35} & a_{36} & a_{37} & a_{38} \\
-        a_{41} & a_{42} & a_{43} & a_{44} & a_{45} & a_{46} & a_{47} & a_{48} \\
-        a_{51} & a_{52} & a_{53} & a_{54} & a_{55} & a_{56} & a_{57} & a_{58} \\
-        a_{61} & a_{62} & a_{63} & a_{64} & a_{65} & a_{66} & a_{67} & a_{68} \\
-        a_{71} & a_{72} & a_{73} & a_{74} & a_{75} & a_{76} & a_{77} & a_{78} \\
-        a_{81} & a_{82} & a_{83} & a_{84} & a_{85} & a_{86} & a_{87} & a_{88} \\
-        \end{pmatrix}
-        \]</p>
-      <p>\[ x=
-        \begin{pmatrix}
-        a_{11} & a_{12} & a_{13} & a_{14} & a_{15} & a_{16} & a_{17} & a_{18} \\
-        a_{21} & a_{22} & a_{23} & a_{24} & a_{25} & a_{26} & a_{27} & a_{28} \\
-        a_{31} & a_{32} & a_{33} & a_{34} & a_{35} & a_{36} & a_{37} & a_{38} \\
-        a_{41} & a_{42} & a_{43} & a_{44} & a_{45} & a_{46} & a_{47} & a_{48} \\
-        a_{51} & a_{52} & a_{53} & a_{54} & a_{55} & a_{56} & a_{57} & a_{58} \\
-        a_{61} & a_{62} & a_{63} & a_{64} & a_{65} & a_{66} & a_{67} & a_{68} \\
-        a_{71} & a_{72} & a_{73} & a_{74} & a_{75} & a_{76} & a_{77} & a_{78} \\
-        a_{81} & a_{82} & a_{83} & a_{84} & a_{85} & a_{86} & a_{87} & a_{88} \\
-        \end{pmatrix}
-        \]</p>
-    </div>
-    <form method="dialog" class="paper_dialog_close">
-      <button>X</button>
-    </form>
-
-  </dialog> -->
 
   <div class="console-board">
     <div class="screws">
@@ -512,6 +461,40 @@
 
       <div class="result-bar">
         <p class="label">RESULTS</p>
+
+        <div class="row zoom-image">
+          <div class="col">
+            <div class="display">
+              <canvas id="zoomed_img_canvas">
+              </canvas>
+            </div>
+            <div class="label">Original image</div>
+          </div>
+
+          <div class="col">
+            <div class="display" style="height: fit-content;">
+              <canvas id="zoom_canvas">
+              </canvas>
+            </div>
+            <div class="controller">
+              <div class="buttons">
+                <input type="button" value="-" id="zoom_out">
+                <input type="button" value="+" id="zoom_in">
+              </div>
+              <div class="label">Zoom</div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="display">
+              <canvas id="zoomed_compressed_img_canvas">
+              </canvas>
+            </div>
+            <div class="label">Compressed Image</div>
+          </div>
+          
+        </div>
+
 
         <div class="row">
           <div class="col">

@@ -77,9 +77,6 @@ export default class ImageProcessorComponent {
 
         ImageProcessorComponent.enableControllers();
         DOMUtils.disableInput("stop");
-        DOMUtils.setInnerHTML("compression_ratio", this.rate.toFixed(2).toString());
-        
-        DOMUtils.setInnerHTML("compression_reduction", ((1-1/this.rate)*100).toFixed(2).toString()+" %")
     }
 
     static async preProcessImage(rawImage, newWidth, newHeight) {
@@ -264,13 +261,13 @@ export default class ImageProcessorComponent {
             DOMUtils.enableInput("play");
         }
 
-        if (this.speed == 1) {
+        if (this.speed <= 1) {
             DOMUtils.disableInput("slow_down");
         } else {
             DOMUtils.enableInput("slow_down");
         }
 
-        if (this.speed == 11) {
+        if (this.speed >= 11) {
             DOMUtils.disableInput("speed_up");
         } else {
             DOMUtils.enableInput("speed_up");

@@ -1,4 +1,5 @@
 import ImageProcessorComponent from "./src/components/ImageProcessorComponent.js";
+import ResultComponent from "./src/components/ResultComponent.js";
 ImageProcessorComponent.disableControllers();
 let state = {
   upload: false,
@@ -7,6 +8,7 @@ let state = {
 };
 
 let processor;
+let result;
 
 function updateState() {
   if (state.upload) {
@@ -49,18 +51,28 @@ input.addEventListener("change", () => {
       const reader = new FileReader();
       reader.onload = async () => {
         const rawImg = reader.result;
-        processor = new ImageProcessorComponent();
 
+        processor = new ImageProcessorComponent();
+        await processor.init(rawImg);
         document.getElementById("img_canvas").addEventListener("mousedown", function (event) {
           let rect = document.getElementById("img_canvas").getBoundingClientRect();
           let x = event.clientX - rect.left;
           let y = event.clientY - rect.top;
           processor.setPosition(x, y);
         });
-
         state.processed = true;
         updateState();
-        await processor.init(rawImg);
+
+        
+        zoom_canvas
+        result = new ResultComponent(processor.img, processor.compression_result);
+        await result.init();
+        document.getElementById("zoom_canvas").addEventListener("mousedown", function (event) {
+          let rect = document.getElementById("zoom_canvas").getBoundingClientRect();
+          let x = event.clientX - rect.left;
+          let y = event.clientY - rect.top;
+          result.setPosition(x, y);
+        });
         state.ready = true;
         updateState();
       };
