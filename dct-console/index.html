@@ -46,13 +46,13 @@
       <hr>
       <div class="row">
         <div class="col">
-          <p>Click on the image to move the cursor</p>
+          <p class="hint">Click on the image to move the cursor</p>
           <div class="display">
 
             <canvas id="img_canvas">
             </canvas>
           </div>
-          <div id="controllers">
+          <div class="col">
             <div style="display: flex;justify-content: space-evenly;">
               <div class="controller">
                 <div class="buttons">
@@ -77,7 +77,7 @@
               </div>
             </div>
 
-            <div style="display: flex;justify-content: space-evenly;">
+            <div class="row" style="justify-content: space-evenly;">
               <div class="controller">
                 <div class="buttons">
                   <input type="button" value="-" id="slow_down">
@@ -88,19 +88,30 @@
               </div>
             </div>
 
-            <div class="controller" style="display: none;">
-              <div class="buttons">
-                <input type="button" value="Show" id="show_calcs">
+            <div class="row" style="justify-content: space-evenly; align-items: center;">
+              <div class="col">
+                <div id="single_compression_reduction" class=" display">--.--%</div>
+                <p class="label">Reduction</p>
               </div>
-              <div class="label">calcs</div>
+              <div class="controller" >
+                <div class="buttons">
+                  <input type="button" value="SHOW CALCS" id="show_calcs">
+                </div>
+              </div>
             </div>
+
 
           </div>
         </div>
 
         <div class="col">
+          
+          
 
           <div class="row">
+            <div class="col arrow" style="align-self: center;">
+              <p class="label">→</p>
+            </div>
             <div class="col" style="align-self: center;">
               <div class="matrix" id="original_matrix">
                 <div class="row">
@@ -184,9 +195,11 @@
                   <div class="pixel"></div>
                 </div>
               </div>
-              <p class="label">original matrix</p>
+              <p class="label">original pixel matrix</p>
             </div>
-
+            <div class="col arrow" style="align-self: center;">
+              <p class="label">→</p>
+            </div>
             <div class="col">
               <div class="matrix" id="dct_matrix">
                 <div class="row-number">
@@ -271,15 +284,14 @@
                 </div>
               </div>
               <p class="label">dct matrix</p>
+              <p class="label arrow">↓</p>
             </div>
-          </div>
-          <div class="col" style="align-self: flex-start;margin: 0; margin-left: 70px; ">
-            <div id="single_compression_reduction" class=" display">--.--%</div>
-            <p class="label">Reduction</p>
           </div>
 
           <div class="row">
-
+            <div class="col arrow" style="align-self: center;">
+              <p class="label">&nbsp;</p>
+            </div>
             <div class="col" style="align-self: center;">
               <div class="matrix" id="compressed_matrix">
                 <div class="row">
@@ -363,10 +375,12 @@
                   <div class="pixel"></div>
                 </div>
               </div>
-              <p class="label">compressed matrix</p>
+              <p class="label">quantized pixel matrix</p>
             </div>
-
-            <div class="col">
+            <div class="col arrow" style="align-self: center;">
+              <p class="label">←</p>
+            </div>
+            <div class="col" style="margin-top: 2px;">
               <div class="matrix" id="dct_matrix_compressed">
                 <div class="row-number">
                   <div class="number">&nbsp;</div>
@@ -452,8 +466,10 @@
               <p class="label">quantized dct matrix
               </p>
             </div>
-
           </div>
+
+          
+
         </div>
       </div>
 
@@ -472,6 +488,7 @@
           </div>
 
           <div class="col">
+            <p class="hint">Click on the image<br> to move the cursor</p>
             <div class="display" style="height: fit-content;">
               <canvas id="zoom_canvas">
               </canvas>
@@ -481,7 +498,7 @@
                 <input type="button" value="-" id="zoom_out">
                 <input type="button" value="+" id="zoom_in">
               </div>
-              <div class="label">Zoom</div>
+              <div class="label">Zoom out/in</div>
             </div>
           </div>
 
@@ -490,9 +507,9 @@
               <canvas id="zoomed_compressed_img_canvas">
               </canvas>
             </div>
-            <div class="label">Compressed Image</div>
+            <div class="label">Quantized Image</div>
           </div>
-          
+
         </div>
 
 

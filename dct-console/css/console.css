@@ -67,12 +67,12 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    width: 100%;
     margin-top: 0px;
 
 }
 
 .display {
+    font-size: 20px;
     padding: 10px;
     background: var(--base-color);
     box-shadow: inset 4px 4px 5px var(--dark-shadow),
@@ -83,6 +83,7 @@
     #img_canvas {
         height: 320px;
         width: 320px;
+        cursor: pointer;
     }
 
     #zoomed_img_canvas,
@@ -94,9 +95,13 @@
     #zoom_canvas {
         height: 160px;
         width: 160px;
+        cursor: pointer;
     }
 
-
+}
+#single_compression_reduction{
+    width: 100px;
+    text-align: center;
 }
 
 .screws {
@@ -135,7 +140,17 @@
     }
 }
 
+.hint{
+    text-transform: lowercase;
+    user-select: none;
+}
+
 .zoom-image {
     align-items: center;
     justify-content: space-around;
+}
+
+.arrow{
+    margin: 0 !important;
+    font-size: 25px !important;
 }
