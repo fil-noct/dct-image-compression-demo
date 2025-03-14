@@ -15,11 +15,11 @@
   --gradient: linear-gradient( -90deg, #e0dfde, #dbd7d5);
 
   --base-color: #dfdedd;
-  --dark-shadow: #bebebe;
-  --bright-shadow: #f8f8f8;
+  --dark-shadow: #bebebe91;
+  --bright-shadow: #f8f8f891;
 
   --light-color: #98FF54;
-  --pixel-color: #DB5375;
+  --pixel-color: #DB5375A6;
   --number-color: #1E152A69;
 } 
 

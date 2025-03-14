@@ -5,7 +5,7 @@ input {
     background: var(--base-color);
     box-shadow: 4px 4px 10px 2px var(--dark-shadow),
         -4px -4px 10px 5px var(--bright-shadow);
-
+    color: #3a3238d7;
     &:disabled,
     &:active {
         outline: none;
@@ -16,8 +16,8 @@ input {
 }
 
 input[type=button] {
+    font-weight: bold;
     border: none;
-    color: black;
     padding: 8px 16px;
     text-decoration: none;
     cursor: pointer;
@@ -33,10 +33,10 @@ input[type="file"] {
 }
 
 .custom-file-picker {
-    font-size: 16px;
+    font-size: 24px;
     margin: auto;
-    border-radius: 5px;
-    padding: 16px;
+    border-radius: 10px;
+    padding: 8px 16px;
     background: var(--base-color);
     box-shadow: 5px 5px 10px var(--dark-shadow),
         -5px -5px 10px var(--bright-shadow);

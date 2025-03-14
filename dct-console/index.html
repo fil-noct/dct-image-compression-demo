@@ -20,28 +20,54 @@
     <div class="console-body">
 
       <div class="status-bar">
+        
         <input type="file" id="img_upload" accept="image/*" hidden>
-        <div style="display: flex;"><label for="img_upload" class="custom-file-picker">⏏ load image</label></div>
-        <div class="status-led">
-          <div class="led">
-            <div class="light" id="up_led"></div>
+        <div style="display:flex;flex-direction:column; align-items:center">
+          <label for="img_upload" class="custom-file-picker">⏏</label>
+          <div class="label" style="margin-top: 10px;">load image</div>
+        </div>
+        <div class="image-samples">
+          <div id="samples">
+            <input type="button" value="1">
+            
+            <input type="button" value="2">
+            
+            <input type="button" value="3">
+            
+            <input type="button" value="4">
+            <!-- <img src="samples/1.jpg">
+            
+            <img src="samples/2.jpg">
+            
+            <img src="samples/2.jpg"> -->
           </div>
-          <div class="label">loaded</div>
+          <div class="label">Samples</div>
+
+        </div>
+        <div class="leds">
+          <div class="status-led">
+            <div class="led">
+              <div class="light" id="up_led"></div>
+            </div>
+            <div class="label">loaded</div>
+          </div>
+          
+          <div class="status-led">
+            <div class="led">
+              <div class="light" id="pro_led"></div>
+            </div>
+            <div class="label">processed</div>
+          </div>
+  
+          <div class="status-led">
+            <div class="led">
+              <div class="light" id="ready_led"></div>
+            </div>
+            <div class="label">ready</div>
+          </div>
         </div>
 
-        <div class="status-led">
-          <div class="led">
-            <div class="light" id="pro_led"></div>
-          </div>
-          <div class="label">processed</div>
-        </div>
-
-        <div class="status-led">
-          <div class="led">
-            <div class="light" id="ready_led"></div>
-          </div>
-          <div class="label">ready</div>
-        </div>
+        
       </div>
       <hr>
       <div class="row">
@@ -85,18 +111,6 @@
                   <input type="button" value="+" id="speed_up">
                 </div>
                 <div class="label">speed</div>
-              </div>
-            </div>
-
-            <div class="row" style="justify-content: space-evenly; align-items: center;">
-              <div class="col">
-                <div id="single_compression_reduction" class=" display">--.--%</div>
-                <p class="label">Reduction</p>
-              </div>
-              <div class="controller" >
-                <div class="buttons">
-                  <input type="button" value="SHOW CALCS" id="show_calcs">
-                </div>
               </div>
             </div>
 
@@ -200,7 +214,7 @@
             <div class="col arrow" style="align-self: center;">
               <p class="label">→</p>
             </div>
-            <div class="col">
+            <div class="col" style="margin-top: 60px;">
               <div class="matrix" id="dct_matrix">
                 <div class="row-number">
                   <div class="number">&nbsp;</div>
@@ -284,7 +298,20 @@
                 </div>
               </div>
               <p class="label">dct matrix</p>
-              <p class="label arrow">↓</p>
+              <div class="row" style="width:100%;justify-content: space-around;align-items: center;">
+
+                <div class="col" style="margin: 0;">
+                  <div id="single_compression_reduction" class=" display">--.--%</div>
+                  <p class="label">Reduction</p>
+                </div>
+
+                <p class="label arrow" style="margin-bottom: 20px !important;">↓</p>
+
+                <div class="controller" >
+                    <input type="button" value="∑∑ ⊗ ≈" id="show_calcs" style="width: 120px;">
+                    <div class="label">SHOW CALCS</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -533,6 +560,17 @@
 
 
   </div>
+
+
+  <dialog id="paper_dialog">
+    <div class="dialog_body paper_texture" id="paper_dialog_body">
+    
+    </div>
+    <form method="dialog" class="paper_dialog_close">
+      <button>X</button>
+    </form>
+
+  </dialog>
 </body>
 
 

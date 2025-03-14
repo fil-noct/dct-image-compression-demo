@@ -37,20 +37,6 @@ impl MatrixDimensions {
     }
 }
 
-pub struct MatrixView<'a> {
-    data: &'a Matrix,
-    dimensions: MatrixDimensions,
-}
-
-impl<'a> MatrixView<'a> {
-    pub fn new(matrix: &'a Matrix) -> Result<Self, MatrixError> {
-        Ok(Self {
-            data: matrix,
-            dimensions: MatrixDimensions::new(matrix)?,
-        })
-    }
-}
-
 pub fn partition_into_blocks(matrix: &Matrix, block_size: usize) -> Result<Vec<Matrix>, MatrixError> {
     let dims = MatrixDimensions::new(matrix)?;
     let mut blocks = Vec::new();
@@ -145,22 +131,44 @@ pub fn merge_blocks(
     Ok(())
 }
 
-pub fn to_latex(matrix: &Matrix) -> Result<String, MatrixError> {
-    let dims = MatrixDimensions::new(matrix)?;
-    let mut latex = String::from("\\begin{bmatrix}\n");
+// pub fn to_latex(matrix: &Matrix) -> Result<String, MatrixError> {
+//     let dims = MatrixDimensions::new(matrix)?;
+//     let mut latex = String::from("\\begin{bmatrix}\n");
+    
+//     for row in matrix.iter() {
+//         let formatted_row: Vec<String> = row
+//             .iter()
+//             .map(|&val| format!("{:.2}", val).trim_end_matches(".00").to_string())
+//             .collect();
+//         latex.push_str(&formatted_row.join(" & "));
+//         latex.push_str(" \\\\\n");
+//     }
+//     latex.push_str("\\end{bmatrix}");
+    
+//     Ok(latex)
+// }
+
+pub fn to_mathml(matrix: &Matrix) -> Result<String, MatrixError> {
+    let mut mathml = String::from("<mtable>");
     
     for row in matrix.iter() {
-        let formatted_row: Vec<String> = row
-            .iter()
-            .map(|&val| format!("{:.2}", val).trim_end_matches(".00").to_string())
-            .collect();
-        latex.push_str(&formatted_row.join(" & "));
-        latex.push_str(" \\\\\n");
+        mathml.push_str("<mtr>");
+        
+        for val in row.iter() {
+            let v = if val.eq(&0.0) {val.abs()} else {*val};
+            // Creiamo una variabile per il valore formattato
+            let formatted_value = format!("{:.2}", v).trim_end_matches(".00").to_string();
+            mathml.push_str(&format!("<mtd>{}</mtd>", formatted_value));
+        }
+        
+        mathml.push_str("</mtr>");
     }
-    latex.push_str("\\end{bmatrix}");
     
-    Ok(latex)
+    mathml.push_str("</mtable>");
+    
+    Ok(mathml)
 }
+
 
 #[cfg(test)]
 mod tests {

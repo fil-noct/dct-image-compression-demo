@@ -26,13 +26,20 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 0px;
+    align-items: center;
+}
+
+.leds{
+    display: flex;
+    margin-bottom: 20px;
 }
 
 .status-led {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin: 20px;
-
+    width: 100px;
+    
     .led {
         border-radius: 10px;
         display: flex;
@@ -61,6 +68,45 @@
 
 }
 
+.image-samples{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    margin-bottom: 20px;
+    #samples{
+        border-radius: 10px;
+        display: flex;
+        width: 300px;
+        height: 50px;
+        color: gainsboro;
+        /* box-shadow: inset 4px 4px 10px var(--dark-shadow),
+            inset -4px -4px 10px var(--bright-shadow); */
+        align-items: center;
+        justify-content: space-evenly;
+        img{
+            height: 80px;
+            width: 80px;
+            border-radius: 10px;
+            margin: 1px solid black;
+            -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+            filter: grayscale(100%);
+            cursor: pointer;
+            box-shadow:  4px 4px 10px var(--dark-shadow),
+             -4px -4px 10px var(--bright-shadow);
+
+             &:disabled,
+            &:active {
+                outline: none;
+                background: var(--base-color);
+                box-shadow: inset 4px 4px 10px var(--dark-shadow),
+                inset -4px -4px 10px var(--bright-shadow);
+            }
+            
+        }
+    }
+}
+    
 .result-bar {
     margin: 20px;
     display: flex;
@@ -79,13 +125,13 @@
         inset -4px 4px 5px var(--bright-shadow);
     border-radius: 10px;
     width: fit-content;
-
+    color: #3a3238d7;
     #img_canvas {
         height: 320px;
         width: 320px;
         cursor: pointer;
     }
-
+    user-select: none;
     #zoomed_img_canvas,
     #zoomed_compressed_img_canvas {
         height: 320px;
@@ -102,6 +148,8 @@
 #single_compression_reduction{
     width: 100px;
     text-align: center;
+    padding:8px 16px;
+    margin: 10px;
 }
 
 .screws {
@@ -153,4 +201,7 @@
 .arrow{
     margin: 0 !important;
     font-size: 25px !important;
+    color: #3a3238d7;
 }
+
+

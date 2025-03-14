@@ -5,9 +5,17 @@
     padding: 0;
 }
 
+#paper_dialog_body{
+    display: flex;
+    flex-direction: column;
+    math{
+        margin: 30px;
+    }
+}
+
 .paper_texture {
     width: 21cm; /* Larghezza A4 */
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="100%" height="100%" fill="white"/><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300aaaa" stroke-width="0.5"/></svg>') repeat;
+    /* background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="100%" height="100%" fill="white"/><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300aaaa" stroke-width="0.5"/></svg>') repeat; */
     /* background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="100%" height="100%" fill="white"/><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23424242" stroke-width="0.5"/></svg>') repeat; */
     font-size: 20px;
     padding: 20px;
@@ -15,8 +23,8 @@
   }
 
 .paper_texture p{
-    margin: 0; /* Elimina margini verticali */
-    padding: 0; /* Evita spazi indesiderati */
+    margin: 0;
+    padding: 0;
     line-height: 20px; 
     margin-top: 20px;
 }
@@ -29,10 +37,12 @@
 }
 
 .paper_dialog_close button{
+    cursor: pointer;
     border: none;
     background-color: transparent;
     font-size: 20px;
-    color: gray;
+    color: white;
+    background-color: #424242c6;
 }
 .paper_dialog_close button:focus{
     outline: none;

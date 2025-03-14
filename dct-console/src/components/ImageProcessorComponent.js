@@ -41,6 +41,13 @@ export default class ImageProcessorComponent {
                 this.autoplay();
 
         }
+
+        DOMUtils.setClickEvent("show_calcs", ()=>{
+            if (this.compression_result != null && this.index!=null) {
+                document.getElementById("paper_dialog_body").innerHTML=this.compression_result.latex_calculations[this.index];
+                document.getElementById("paper_dialog").showModal();
+            }
+        });
     }
 
     setPosition(x, y) {
@@ -282,7 +289,6 @@ export default class ImageProcessorComponent {
     }
 
     autoplay() {
-        console.log(this.speed);
         clearInterval(this.interval);
         this.interval = setInterval(() => this.nextStep(), (1 / (this.speed)) * 1000);
     }
